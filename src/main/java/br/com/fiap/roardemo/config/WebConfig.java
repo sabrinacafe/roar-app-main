@@ -18,14 +18,14 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         CookieLocaleResolver resolver = new CookieLocaleResolver();
-        resolver.setDefaultLocale(Locale.ENGLISH); // IDIOMA PADRÃO
+        resolver.setDefaultLocale(Locale.ENGLISH);
         return resolver;
     }
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-        interceptor.setParamName("lang"); // DEFINE PADRÃO
+        interceptor.setParamName("lang");
         return interceptor;
     }
 

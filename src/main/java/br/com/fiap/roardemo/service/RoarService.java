@@ -1,29 +1,31 @@
 package br.com.fiap.roardemo.service;
 
 import br.com.fiap.roardemo.model.Roar;
+import br.com.fiap.roardemo.repository.RoarRepository;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class RoarService {
 
-    private static List<Roar> roars = new ArrayList<>();
+    private final RoarRepository repository;
 
-    public static List<Roar> getRoars() {
-        return roars;
+    public RoarService(RoarRepository repository) {
+        this.repository = repository;
     }
 
-    public static void addRoar(String content, String username) {
-        Roar roar = new Roar(roars.size() + 1L, content, 0, new ArrayList<>(), username);
-        roars.add(roar);
+    public List<Roar> listAll() {
+        return repository.findAllByOrderByCreatedAtDesc();
     }
 
-    public static void likeRoar(Long tweetId) {
-        for (Roar roar : roars) {
-            if (roar.getId().equals(tweetId)) {
-                roar.setLikes(roar.getLikes() + 1);
-            }
-        }
+    public void save(Roar roar) {
+        repository.save(roar);
     }
 
+    public void like(Long id) {
+        Roar roar = repository.findById(id).orElseThrow();
+        roar.setLikes(roar.getLikes() + 1);
+        repository.save(roar);
+    }
 }

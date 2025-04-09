@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface RoarRepository extends JpaRepository<Roar, Long> {
 
-    // Buscar todos os roars em ordem decrescente de criação
     List<Roar> findAllByOrderByCreatedAtDesc();
 }

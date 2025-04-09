@@ -1,20 +1,23 @@
 package br.com.fiap.roardemo.model;
 
-import java.util.List;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
+@Entity
 public class Roar {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String content;
     private int likes;
     private String username;
+    private String avatarUrl;
 
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    public Roar(Long id, String content, int likes, List<String> replies, String username) {
-        this.id = id;
-        this.content = content;
-        this.likes = likes;
-        this.username = username;
-    }
+    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -46,5 +49,21 @@ public class Roar {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
